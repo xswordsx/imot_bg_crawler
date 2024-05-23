@@ -29,15 +29,12 @@ class ImotBgSpider(BaseSpider):
     def parse_item(self, response):
         url = response.url
         ad_id = parse_qs(urlparse(url).query).get('adv')[0]
-        metadata_raw = response.css('div[style*="inline-block; float:left; margin-top:15px;"] > ul >li').getall()
+        metadata_raw = response.css('div.adParams > *').getall()
         metadata = {}
-        index = 0
         for item in metadata_raw:
-            if index % 2 == 0:
-                metadata[get_html_tag_text(item)] = ''
-            else:
-                metadata[get_html_tag_text(metadata_raw[index - 1])] = get_html_tag_text(item)
-            index += 1
+            line = get_html_tag_text(item)
+            k, v = line.split(': ')
+            metadata[k] = v
 
         price = response.css('#cena').get()
         price = get_html_tag_text(price).strip()
@@ -45,7 +42,7 @@ class ImotBgSpider(BaseSpider):
         descr_base = get_html_tag_text(descr_base).strip()
         descr_extra = response.css('#dots_less').get()
         descr_extra = get_html_tag_text(descr_extra).strip()
-        address = response.css('span[style*="font-size:14px; margin:8px 0; display:inline-block"]').get()
+        address = response.css('.location').get()
         address = get_html_tag_text(address)
         descr = descr_base + descr_extra
         descr.replace('Виж повече', '')
