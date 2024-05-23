@@ -25,3 +25,11 @@ with open(INPUT_FILE, 'r') as input_file:
 SKIP_EXISTING = True
 PER_ITEM_RESULT = True
 PER_ITEM_DOWNLOAD_IMAGES = True
+
+# Send emails on new offers
+SEND_EMAIL     = False
+EMAIL_ADDRESS  = "smtp.google.com"
+EMAIL_PORT     = 465
+EMAIL_USERNAME = "your.email@mail"
+EMAIL_PASSWORD = "your_app_password"
+EMAIL_RECIPIENTS = ["email1@mail", "email2@mail"]

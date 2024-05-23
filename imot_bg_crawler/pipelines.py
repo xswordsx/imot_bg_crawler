@@ -7,7 +7,14 @@ import requests
 from scrapy.exceptions import DropItem
 from slugify import slugify
 
-from .settings import PER_ITEM_DOWNLOAD_IMAGES, PER_ITEM_RESULT, SKIP_EXISTING
+from .sendmail import send_email
+from .settings import (
+    PER_ITEM_DOWNLOAD_IMAGES,
+    PER_ITEM_RESULT,
+    SKIP_EXISTING,
+    SEND_EMAIL,
+    EMAIL_RECIPIENTS,
+)
 
 
 class ImotBgCrawlerPipeline:
@@ -108,6 +115,20 @@ class ImotBgCrawlerPipeline:
             self.write_item_result_file(item)
             if PER_ITEM_DOWNLOAD_IMAGES:
                 self.download_item_pictures(item)
+        if SEND_EMAIL:
+            spider.logger.debug(f"Sending email to {len(EMAIL_RECIPIENTS)} recipients")
+            data = item[list(item)[0]]
+            imgInsert = ''
+            if len(data['images']) > 0:
+                imgInsert = f'<img width="400px" src="{data["images"][0]}"/><br/>'
+
+            subject = f"Нов имот в {data['address'].split(', ')[1]} - {data['price']}"
+            body = f"""
+            Площ: <b>{data['metadata'].get('Площ', 'N/A')}</b> | Етаж: <b>{data['metadata'].get('Етаж', 'N/A')}</b>
+            <br/>
+            <a href='{data['url']}'>{imgInsert}Link</a>
+            """
+            send_email(subject=subject, body=body)
         return item
 
     def close_spider(self, spider):
