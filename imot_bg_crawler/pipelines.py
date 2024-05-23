@@ -21,7 +21,7 @@ class ImotBgCrawlerPipeline:
 
     @staticmethod
     def get_filename(prefix='result_', suffix=None):
-        return f'{prefix}{datetime.datetime.now().strftime("%d-%m-%Y@%H:%M")}' \
+        return f'{prefix}{datetime.datetime.now().strftime("%d-%m-%Y@%Hh%Mm")}' \
                f'{"_" + suffix if suffix is not None else ""}.json'
 
     @staticmethod
