@@ -23,3 +23,4 @@ def send_email(subject, body):
             html_message["From"] = sender_email
             html_message["To"] = recipient_email
             server.sendmail(sender_email, recipient, html_message.as_string())
+        server.close()
