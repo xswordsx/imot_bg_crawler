@@ -34,9 +34,10 @@ class ImotBgCrawlerPipeline:
     @staticmethod
     def get_item_dir_name(item):
         item_id = list(item)[0]
-        folder_name = f'{slugify(item[item_id]["address"].split(",")[-1].strip())}_' \
-                      f'{item_id}'
-        folder_path = os.path.join(slugify(item[item_id]['source']), folder_name)
+        subfolders = list(map(slugify, item[item_id]["address"].split(", "))) + [
+            item_id
+        ]
+        folder_path = os.path.join(slugify(item[item_id]["source"]), *subfolders)
         if not os.path.isdir(folder_path):
             os.makedirs(folder_path)
         return folder_path
