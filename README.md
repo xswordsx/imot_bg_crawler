@@ -6,11 +6,13 @@ A crawler for the `imot.bg` and `imoti.com` websites.
 
 1. Create virtual environment for the project using Python 3.8+
 2. Install requirements with `pip install -r requirements.txt`
-3. Update search URLs in the file `./imot_bg_crawler/input.yaml`
-   When done, check with `http://www.yamllint.com/` if the input file is okay.
-4. Run spider for the desired website. If you do not want logs add `--nolog` in the end of the command
-5. When finished, check the `./imot_bg_crawler/output_files` folder for the results.
-6. Enjoy.
+3. Copy `imot_bg_crawler/input.example.yaml` to `imot_bg_crawler/input.yaml` and update the search
+   URLs in the file. When done, check with `http://www.yamllint.com/` if the input file is okay.
+4. Copy `imot_bg_crawler/settings.example.py` to `imot_bg_crawler/settings.py` and change the settings
+   as you need them _(see the [Settings](#settings) section)_.
+5. Run spider for the desired website. If you do not want logs add `--nolog` in the end of the command
+6. When finished, check the `./imot_bg_crawler/output_files` folder for the results.
+7. Enjoy.
 
 
 ## Spiders
