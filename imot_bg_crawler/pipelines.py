@@ -58,10 +58,9 @@ class ImotBgCrawlerPipeline:
         return os.path.isdir(absolute_folder)
 
     def get_all_results_file(self, spider_source):
-        file_path = os.path.dirname(__file__)
         prefix = slugify(spider_source) + "_"
         filename = self.get_filename(prefix=prefix)
-        self.output_path = os.path.join(file_path, "output_files")
+        self.output_path = os.path.join(os.getcwd(), "output_files")
         results_folder = os.path.join(
             self.output_path, self.results_folder, slugify(spider_source)
         )
