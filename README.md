@@ -1,4 +1,8 @@
-# To use
+# Imot crawler
+
+A crawler for the `imot.bg` and `imoti.com` websites.
+
+## Running
 
 1. Create virtual environment for the project using Python 3.8+
 2. Install requirements with `pip install -r requirements.txt`
@@ -9,13 +13,13 @@
 6. Enjoy.
 
 
-# Spiders
+## Spiders
 
 1. Imot.bg - `scrapy crawl imot.bg`
 2. Imoti.com - `scrapy crawl imoti.com`
 
 
-# Settings
+## Settings
 
 `SKIP_EXISTING` - does not save data if already saved, default `True`
 
