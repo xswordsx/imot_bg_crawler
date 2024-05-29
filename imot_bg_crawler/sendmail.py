@@ -23,4 +23,22 @@ def send_email(subject, body):
             html_message["From"] = sender_email
             html_message["To"] = recipient_email
             server.sendmail(sender_email, recipient, html_message.as_string())
-        server.close()
+
+def format_subject(data):
+    return f"Нов имот в {data['address'].split(', ')[1]} - {data['price']}"
+
+def format_body(data):
+    body = f"""
+    <h4>
+    Площ: <b>{data['metadata'].get('Площ', 'N/A')}</b> | Етаж: <b>{data['metadata'].get('Етаж', 'N/A')}</b>
+    </h4>
+    <br/>
+    <a href='{data['url']}'>
+    """
+
+    for img_url in data.get("images", []):
+        body += f'<img width="400px" src="{img_url}"/>'
+
+    body += "<br/>Link</a>"
+
+    return body
