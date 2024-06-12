@@ -21,7 +21,7 @@ class ImotBgCrawlerPipeline:
 
     @staticmethod
     def get_filename(prefix='result_', suffix=None):
-        return f'{prefix}{datetime.datetime.now().strftime("%d-%m-%Y@%H:%M")}' \
+        return f'{prefix}{datetime.datetime.now().strftime("%d-%m-%Y@%Hh%Mm")}' \
                f'{"_" + suffix if suffix is not None else ""}.json'
 
     @staticmethod
@@ -67,7 +67,7 @@ class ImotBgCrawlerPipeline:
         filename = self.get_filename(prefix=f'ad-id_{item_id}_')
         filepath = self.get_create_item_dir(item)
         absolute_filename = os.path.join(filepath, filename)
-        with open(absolute_filename, 'w') as file:
+        with open(absolute_filename, 'w', encoding='utf-8') as file:
             file.write(json.dumps(item, ensure_ascii=False).encode('utf8').decode())
             file.close()
 
@@ -96,7 +96,7 @@ class ImotBgCrawlerPipeline:
     def open_spider(self, spider):
         spider_source = spider.allowed_domains[0]
         filename = self.get_all_results_file(spider_source=spider_source)
-        self.results_file = open(filename, 'a')
+        self.results_file = open(filename, 'a', encoding='utf-8')
         self.start_time = datetime.datetime.now()
 
     def process_item(self, item, spider):
