@@ -25,10 +25,6 @@ A crawler for the `imot.bg` and `imoti.com` websites.
 
 `SKIP_EXISTING` - does not save data if already saved, default `True`
 
-`PER_ITEM_RESULT` - saves every item in a separate folder, default `True`
-
-`PER_ITEM_DOWNLOAD_IMAGES` - if PER_ITEM_RESULT is enabled, marks if crawler will download item images, default `True`
-
 `SEND_EMAIL` - should the application send emails for every new offer, default `False`. Setting it
 to `True` requires additional variables to be set as well:
 
